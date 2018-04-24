@@ -49,3 +49,39 @@ Check out the [terragrunt-infra-live-complete repo](https://github.com/vas1468/t
 
 
 
+## How do you change a module?
+
+
+### Local changes
+
+Here is how to test out changes to a module locally:
+
+1. `git clone` this repo.
+1. Update the code as necessary.
+1. Go into the folder where you have the `terraform.tfvars` file that uses a module from this repo (preferably for a 
+   dev or staging environment!).
+1. Run `terragrunt plan --terragrunt-source <LOCAL_PATH>`, where `LOCAL_PATH` is the path to your local checkout of
+   the module code. 
+1. If the plan looks good, run `terragrunt apply --terragrunt-source <LOCAL_PATH>`.   
+
+Using the `--terragrunt-source` parameter (or `TERRAGRUNT_SOURCE` environment variable) allows you to do rapid, 
+iterative, make-a-change-and-rerun development.
+
+
+### Releasing a new version
+
+When you're done testing the changes locally, here is how you release a new version:
+
+1. Update the code as necessary.
+1. Commit your changes to Git: `git commit -m "commit message"`.
+1. Add a new Git tag using one of the following options:
+    1. Using GitHub: Go to the [releases page](/releases) and click "Draft a new release".
+    1. Using Git:
+
+    ```
+    git tag -a v0.0.2 -m "tag message"
+    git push --follow-tags
+    ```
+1. Now you can use the new Git tag (e.g. `v0.0.2`) in the `ref` attribute of the `source` URL in `terraform.tfvars`.
+1. Run `terragrunt plan`.
+1. If the plan looks good, run `terragrunt apply`.  
