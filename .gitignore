@@ -1,6 +1,27 @@
-# Compiled files
-*.tfstate
-*.tfstate.backup
+#  Local .terraform directories
+**/.terraform/*
 
-# Module directory
-.terraform/
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfstate files
+*.tfstate.backup
+*.tfstate.backup.*
+
+# .tfvars files
+*.tfvars
+
+# OS X
+.history
+.DS_Store
+
+# IntelliJ
+.idea_modules
+*.iml
+*.iws
+*.ipr
+.idea/
+build/
+*/build/
+out/
